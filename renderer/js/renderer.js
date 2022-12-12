@@ -4,3 +4,27 @@ const outputPath = document.querySelector("#output-path");
 const filename = document.querySelector("#filename");
 const heightInput = document.querySelector("#height");
 const widthInput = document.querySelector("#width");
+
+function loadImage(e) {
+  const file = e.target.files[0];
+
+  if (!isFileImage) {
+    console.log("Please select a jpg, gif or png");
+    return;
+  }
+
+  console.log("success");
+}
+
+// Make sure file is an image
+function isFileImage(file) {
+  const acceptedImageTypes = [
+    "image/png",
+    "image/jpeg",
+    "image/jpg",
+    "image/gif",
+  ];
+  return file && acceptedImageTypes.includes(file["type"]);
+}
+
+img.addEventListener("change", loadImage);
