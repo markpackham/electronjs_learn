@@ -1,5 +1,5 @@
 const path = require("path");
-const { app, BrowserWindow } = require("electron");
+const { app, BrowserWindow, Menu } = require("electron");
 
 // electorn has it's own nodemon varient which is run like this:
 // npx electronmon .
@@ -8,6 +8,7 @@ const isDev = process.env.NODE_ENV !== "production";
 // check if Mac is being used
 const isMac = process.platform === "darwin";
 
+// Create the main window
 function createMainWindow() {
   const mainWindow = new BrowserWindow({
     title: "Image Resizer",
@@ -23,8 +24,13 @@ function createMainWindow() {
   mainWindow.loadFile(path.join(__dirname, "./renderer/index.html"));
 }
 
+// App is ready
 app.whenReady().then(() => {
   createMainWindow();
+
+  // Implement menu
+  const mainMenu = Menu.buildFromTemplate(menu);
+  Menu.setApplicationMenu(mainMenu);
 
   // Open a window if none are open (Mac)
   app.on("activate", () => {
@@ -35,14 +41,7 @@ app.whenReady().then(() => {
 // Menu template
 const menu = [
   {
-    label: "File",
-    submenu: [
-      {
-        label: "Quit",
-        click: () => app.quit(),
-        accelerator: "CmdOrCtrl+W",
-      },
-    ],
+    role: "fileMenu",
   },
 ];
 
