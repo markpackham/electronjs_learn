@@ -40,9 +40,29 @@ app.whenReady().then(() => {
 
 // Menu template
 const menu = [
+  ...(isMac
+    ? [
+        {
+          label: app.name,
+          submenu: [
+            {
+              label: "About",
+            },
+          ],
+        },
+      ]
+    : []),
   {
     role: "fileMenu",
   },
+  ...(!isMac
+    ? [
+        {
+          label: "Help",
+          submenu: [{ label: "About" }],
+        },
+      ]
+    : []),
 ];
 
 // have app behave the same on Windows and Mac operating systems
