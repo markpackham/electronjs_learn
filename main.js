@@ -1,6 +1,9 @@
 const path = require("path");
 const { app, BrowserWindow } = require("electron");
 
+// electorn has it's own nodemon varient which is run like this:
+// npx electronmon .
+
 const isDev = process.env.NODE_ENV !== "production";
 // check if Mac is being used
 const isMac = process.platform === "darwin";
@@ -28,6 +31,20 @@ app.whenReady().then(() => {
     if (BrowserWindow.getAllWindows().length === 0) createMainWindow();
   });
 });
+
+// Menu template
+const menu = [
+  {
+    label: "File",
+    submenu: [
+      {
+        label: "Quit",
+        click: () => app.quit(),
+        accelerator: "CmdOrCtrl+W",
+      },
+    ],
+  },
+];
 
 // have app behave the same on Windows and Mac operating systems
 // "darwin" for Mac, "win32" for Windows and "linux" for linux
