@@ -15,6 +15,11 @@ function createMainWindow() {
 
 app.whenReady().then(() => {
   createMainWindow();
+
+  // Open a window if none are open (Mac)
+  app.on("activate", () => {
+    if (BrowserWindow.getAllWindows().length === 0) createMainWindow();
+  });
 });
 
 // have app behave the same on Windows and Mac operating systems
