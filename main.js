@@ -24,6 +24,17 @@ function createMainWindow() {
   mainWindow.loadFile(path.join(__dirname, "./renderer/index.html"));
 }
 
+// Create about window
+function createAboutWindow() {
+  const aboutWindow = new BrowserWindow({
+    title: "About and not Aboot",
+    width: 500,
+    height: 600,
+  });
+
+  aboutWindow.loadFile(path.join(__dirname, "./renderer/about.html"));
+}
+
 // App is ready
 app.whenReady().then(() => {
   createMainWindow();
@@ -47,6 +58,7 @@ const menu = [
           submenu: [
             {
               label: "About",
+              click: createAboutWindow,
             },
           ],
         },
@@ -59,7 +71,7 @@ const menu = [
     ? [
         {
           label: "Help",
-          submenu: [{ label: "About" }],
+          submenu: [{ label: "About", click: createAboutWindow }],
         },
       ]
     : []),
