@@ -8,12 +8,13 @@ const widthInput = document.querySelector("#width");
 function loadImage(e) {
   const file = e.target.files[0];
 
-  if (!isFileImage) {
+  if (!isFileImage(file)) {
     console.log("Please select a jpg, gif or png");
     return;
   }
 
-  console.log("success");
+  form.style.display = "block";
+  filename.innerText = file.name;
 }
 
 // Make sure file is an image
