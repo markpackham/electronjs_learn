@@ -1,5 +1,8 @@
 const path = require("path");
-const { app, BrowserWindow, Menu } = require("electron");
+const os = require("os");
+const fs = require("fs");
+const resizeImg = require("resize-img");
+const { app, BrowserWindow, Menu, ipcMain, shell } = require("electron");
 
 // electorn has it's own nodemon varient which is run like this:
 // npx electronmon .
@@ -7,6 +10,9 @@ const { app, BrowserWindow, Menu } = require("electron");
 const isDev = process.env.NODE_ENV !== "production";
 // check if Mac is being used
 const isMac = process.platform === "darwin";
+
+let mainWindow;
+let aboutWindow;
 
 // Create the main window
 function createMainWindow() {
