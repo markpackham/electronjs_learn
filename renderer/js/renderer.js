@@ -27,7 +27,23 @@ function loadImage(e) {
 }
 
 // Send image data to main
-function sendImage(e) {}
+function sendImage(e) {
+  e.preventDefault();
+
+  const width = widthInput.value;
+  const height = heightInput.value;
+  const imgPath = img.files[0].path;
+
+  if (!img.files[0]) {
+    alertError("Please upload an image");
+    return;
+  }
+
+  if (width === "" || height === "") {
+    alertError("Please fill in a height and width");
+    return;
+  }
+}
 
 // Make sure file is an image
 function isFileImage(file) {
