@@ -109,6 +109,9 @@ async function resizeImg({ imgPath, width, height, dest }) {
     if (!fs.existsSync(dest)) {
       fs.mkdirSync(dest);
     }
+
+    // Write file to destination folder
+    fs.writeFileSync(path.join(dest, filename), newPath);
   } catch (error) {
     console.log(error);
   }
