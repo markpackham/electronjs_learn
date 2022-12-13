@@ -21,8 +21,8 @@ function createMainWindow() {
     width: isDev ? 1100 : 500,
     height: 600,
     webPreferences: {
+      nodeIntegration: true,
       contextIsolation: true,
-      nodeIntergration: true,
       preload: path.join(__dirname, "preload.js"),
     },
   });
