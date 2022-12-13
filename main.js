@@ -95,8 +95,20 @@ ipcMain.on("image:resize", (e, options) => {
 });
 
 // Resize the image
-function resizeImg({ imgPath, width, height, dest }) {
+async function resizeImg({ imgPath, width, height, dest }) {
   try {
+    const newPath = await resizeImg(fs.readFileSync(imgPath), {
+      width: +width,
+      height: +height,
+    });
+
+    // Create file namee
+    const filename = "resized-" + path.basename(imgPath);
+
+    // Create destination folder if it doesn't exist
+    if (!fs.existsSync(dest)) {
+      fs.mkdirSync(dest);
+    }
   } catch (error) {
     console.log(error);
   }
