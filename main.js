@@ -37,7 +37,7 @@ function createMainWindow() {
 
 // Create about window
 function createAboutWindow() {
-  const aboutWindow = new BrowserWindow({
+  aboutWindow = new BrowserWindow({
     title: "About and not Aboot",
     width: 500,
     height: 600,
