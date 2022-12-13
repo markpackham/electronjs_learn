@@ -9,7 +9,7 @@ function loadImage(e) {
   const file = e.target.files[0];
 
   if (!isFileImage(file)) {
-    console.log("Please select a jpg, gif or png");
+    alertError("Please select a jpg, gif or png");
     return;
   }
 
@@ -25,6 +25,9 @@ function loadImage(e) {
   form.style.display = "block";
   filename.innerText = file.name;
 }
+
+// Send image data to main
+function sendImage(e) {}
 
 // Make sure file is an image
 function isFileImage(file) {
@@ -64,3 +67,4 @@ function alertSuccess(message) {
 }
 
 img.addEventListener("change", loadImage);
+form.addEventListener("submit", sendImage);
