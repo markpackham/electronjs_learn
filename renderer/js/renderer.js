@@ -43,6 +43,8 @@ function sendImage(e) {
     alertError("Please fill in a height and width");
     return;
   }
+
+  // Send to main using ipcRenderer
 }
 
 // Make sure file is an image
