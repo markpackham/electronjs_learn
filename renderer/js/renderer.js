@@ -19,6 +19,7 @@ function loadImage(e) {
   image.onload = function () {
     widthInput.value = this.width;
     heightInput.value = this.height;
+    outputPath.innerText = path.join(os.homedir(), "imageresizer");
   };
 
   form.style.display = "block";

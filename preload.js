@@ -13,9 +13,10 @@ const path = require("path");
 const { contextBridge, ipcRenderer } = require("electron");
 const Toastify = require("toastify-js");
 
-contextBridge.exposeInMainWorld("versions", {
-  node: () => process.versions.node,
-  chrome: () => process.versions.chrome,
-  electron: () => process.versions.electron,
-  // we can also expose variables, not just functions
+contextBridge.exposeInMainWorld("os", {
+  homedir: () => os.homedir(),
+});
+
+contextBridge.exposeInMainWorld("path", {
+  join: (...args) => path.join(...args),
 });
