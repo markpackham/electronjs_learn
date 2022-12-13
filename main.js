@@ -16,7 +16,7 @@ let aboutWindow;
 
 // Create the main window
 function createMainWindow() {
-  const mainWindow = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     title: "Image Resizer",
     width: isDev ? 1100 : 500,
     height: 600,
@@ -53,6 +53,9 @@ app.whenReady().then(() => {
   // Implement menu
   const mainMenu = Menu.buildFromTemplate(menu);
   Menu.setApplicationMenu(mainMenu);
+
+  // Remove mainWindow from memory on close
+  mainWindow.on("closed", () => (mainWindow = null));
 
   // Open a window if none are open (Mac)
   app.on("activate", () => {
@@ -91,11 +94,11 @@ const menu = [
 // Respond to ipcRender resize
 ipcMain.on("image:resize", (e, options) => {
   options.dest = path.join(os.homedir(), "imageresizer");
-  resizeImg(options);
+  resizeImage(options);
 });
 
 // Resize the image
-async function resizeImg({ imgPath, width, height, dest }) {
+async function resizeImage({ imgPath, height, width, dest }) {
   try {
     const newPath = await resizeImg(fs.readFileSync(imgPath), {
       width: +width,
@@ -112,6 +115,12 @@ async function resizeImg({ imgPath, width, height, dest }) {
 
     // Write file to destination folder
     fs.writeFileSync(path.join(dest, filename), newPath);
+
+    // Send success to renderer
+    mainWindow.webContents.send("image:done");
+
+    // Open destination folder
+    shell.openPath(dest);
   } catch (error) {
     console.log(error);
   }
