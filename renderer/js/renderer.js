@@ -45,6 +45,11 @@ function sendImage(e) {
   }
 
   // Send to main using ipcRenderer
+  ipcRenderer.send("image:resize", {
+    imgPath,
+    width,
+    height,
+  });
 }
 
 // Make sure file is an image

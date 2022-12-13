@@ -88,6 +88,20 @@ const menu = [
     : []),
 ];
 
+// Respond to ipcRender resize
+ipcMain.on("image:resize", (e, options) => {
+  options.dest = path.join(os.homedir(), "imageresizer");
+  resizeImg(options);
+});
+
+// Resize the image
+function resizeImg({ imgPath, width, height, dest }) {
+  try {
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 // have app behave the same on Windows and Mac operating systems
 // "darwin" for Mac, "win32" for Windows and "linux" for linux
 app.on("window-all-close", () => {
